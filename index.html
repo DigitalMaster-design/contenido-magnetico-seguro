@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Biblioteca interactiva de 100 formatos de videos virales para marcas de ropa." />
+  <title>Biblioteca Viral de Reels</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23120f18'/%3E%3Cpath d='M21 16h22v32H21z' fill='none' stroke='%23ffcf45' stroke-width='4'/%3E%3Cpath d='m29 26 11 6-11 6z' fill='%23ff5c7a'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://www.instagram.com" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section class="auth-view" id="authView">
+    <div class="auth-card">
+      <span class="auth-logo">▶</span>
+      <p class="eyebrow">ACCESO EXCLUSIVO</p>
+      <h1>Contenido<br><em>Magnético</em></h1>
+      <p class="auth-copy" id="authCopy">Ingresa con el correo autorizado después de tu compra.</p>
+      <form id="loginForm">
+        <label>Correo electrónico<input id="emailInput" type="email" autocomplete="email" required /></label>
+        <label>Contraseña<input id="passwordInput" type="password" autocomplete="current-password" minlength="8" required /></label>
+        <button class="primary-button" type="submit" id="loginButton">Entrar a la biblioteca</button>
+      </form>
+      <form id="passwordForm" hidden>
+        <label>Nueva contraseña<input id="newPasswordInput" type="password" autocomplete="new-password" minlength="8" required /></label>
+        <label>Confirmar contraseña<input id="confirmPasswordInput" type="password" autocomplete="new-password" minlength="8" required /></label>
+        <button class="primary-button" type="submit">Guardar contraseña</button>
+      </form>
+      <button class="text-button" id="forgotButton" type="button">Olvidé mi contraseña</button>
+      <p class="auth-message" id="authMessage" role="status"></p>
+      <p class="auth-help">¿Aún no tienes acceso? Solicítalo por el mismo WhatsApp donde realizaste tu compra.</p>
+    </div>
+  </section>
+
+  <div id="appShell" hidden>
+  <header class="topbar">
+    <button class="brand" id="homeButton" aria-label="Ir a la biblioteca">
+      <span class="brand-mark">▶</span><span>Contenido Magnético</span>
+    </button>
+    <div class="progress-wrap" aria-label="Progreso de la biblioteca">
+      <span>100 de 100 reels</span><span class="progress"><i></i></span>
+      <button class="logout" id="logoutButton">Salir</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="library-view" id="libraryView">
+      <div class="intro">
+        <p class="eyebrow">EDICIÓN · MARCAS DE ROPA</p>
+        <h1>Encuentra una idea.<br><em>Entiende por qué funciona.</em></h1>
+        <p class="intro-copy">Explora formatos virales, estudia su estructura y guarda el principio que puedes adaptar a tu próxima pieza.</p>
+      </div>
+
+      <div class="controls" aria-label="Controles de la biblioteca">
+        <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar por idea, hook o formato…" autocomplete="off" /></label>
+        <div class="filters" id="filters" role="group" aria-label="Filtrar por categoría"></div>
+        <label class="sort">Ordenar
+          <select id="sortSelect"><option value="number">Por número</option><option value="views">Visualizaciones</option><option value="ratio">Interacción</option></select>
+        </label>
+      </div>
+
+      <div class="results-meta"><strong id="resultCount">50 ideas</strong><span>Selecciona una tarjeta para abrir el análisis</span></div>
+      <div class="grid" id="reelGrid"></div>
+      <div class="empty" id="emptyState" hidden><span>⌕</span><h2>No encontramos ese formato</h2><p>Prueba con otra palabra o cambia la categoría.</p></div>
+    </section>
+
+    <section class="detail-view" id="detailView" hidden>
+      <button class="back" id="backButton">← Volver a la biblioteca</button>
+      <div class="detail-head">
+        <div><p class="eyebrow" id="detailNumber"></p><h1 id="detailTitle"></h1></div>
+        <div class="detail-nav"><button id="prevButton" aria-label="Video anterior">←</button><span id="navPosition"></span><button id="nextButton" aria-label="Video siguiente">→</button></div>
+      </div>
+
+      <div class="detail-layout">
+        <div class="video-column">
+          <div class="phone-frame" id="reelPlayer"></div>
+          <a class="instagram-link" id="instagramLink" target="_blank" rel="noopener noreferrer">Abrir reel en Instagram ↗</a>
+        </div>
+        <article class="structure-card">
+          <p class="section-kicker">ANATOMÍA DEL VIDEO</p>
+          <div id="structureContent"></div>
+        </article>
+      </div>
+
+      <div class="lower-grid">
+        <aside class="tip-card"><span class="tip-icon">✦</span><div><p>TIP PARA REPLICAR</p><blockquote id="tipContent"></blockquote></div></aside>
+        <section class="stats-card"><p class="section-kicker">EL RESULTADO</p><div class="stats"><div><strong id="viewsValue"></strong><span>visualizaciones</span></div><div><strong id="followersValue"></strong><span>seguidores</span></div><div class="accent"><strong id="ratioValue"></strong><span>veces su audiencia</span></div></div><p class="privacy-note">Las marcas y cuentas originales se mantienen fuera de esta biblioteca.</p></section>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
